@@ -262,7 +262,7 @@ initHoverEvents() {
 
         if (st > this.lastScrollTop && st > headerHeight) {
             gsap.to(this.header, {
-                y: -headerHeight,
+                y: -headerHeight - this.remToPx(2),
                 duration: 0.4,
                 ease: 'expo.in'
             });
