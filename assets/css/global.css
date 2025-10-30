@@ -1,0 +1,245 @@
+
+        /* ==================================================
+        استایل‌های جهانی و کمکی برای هدر عمودی مینیمال
+        ================================================== */
+        /* --------------------------------------------------
+        انیمیشن‌های فلش — فقط با CSS
+        -------------------------------------------------- */
+        @keyframes arrow-loop-vertical {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(20px); }
+        }
+
+        @keyframes arrow-loop-horizontal {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateY(20px); } 
+        }
+
+        .arrow-path.animate-loop-initial {
+            animation: arrow-loop-vertical 2.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        .arrow-path.animate-loop-hovered {
+            animation: arrow-loop-horizontal 2.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        /* --------------------------------------------------
+        چرخش آیکون منو — با CSS transition
+        -------------------------------------------------- */
+        .menu-icon {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-icon.is-rotated-90 {
+            transform: rotate(90deg);
+        }
+
+        .menu-icon.is-rotated-180 {
+            transform: rotate(180deg);
+        }
+
+        /* --------------------------------------------------
+        ورود اولیه هدر و استایل‌های عمومی (حالت دسکتاپ پیش‌فرض)
+        -------------------------------------------------- */
+        .minimal-vertical-header {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 8.33vw;
+            height: 22vh; 
+            z-index: 1000;
+            display: flex;
+            flex-direction: column; 
+            flex-wrap: nowrap;
+            align-items: center;
+            box-sizing: border-box;
+            
+            /* حالت پیش فرض با بلور (برای دسکتاپ) */
+            backdrop-filter: blur(4px);
+            background-color: rgb(0 0 0 / 9%);
+            transition: height 0.4s ease, backdrop-filter 0.4s ease, background-color 0.4s ease, transform 0.3s ease-in-out;
+            
+            opacity: 0;
+            transform: translateY(-150px);
+            animation: header-fade-in 5s 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            padding: 1rem 0; 
+            border-radius: 12px;
+        }
+
+        /* حالت هاور یا باز شده (منو فعال) در دسکتاپ - حذف بلور و تغییر رنگ پس زمینه */
+        /* این استایل فقط در دسکتاپ اعمال می شود و در موبایل override می شود */
+        .minimal-vertical-header:hover,
+        .minimal-vertical-header.is-expanded-menu { 
+            backdrop-filter: none;
+            background-color: var(--wp--preset--color--surface);
+            color: #1a1a1a;
+        }
+
+        @keyframes header-fade-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .svg-menu-icon {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .logo-container {
+            width: 60%;
+        }
+
+        
+            .cta-button-wrapper {
+                opacity: 0 ;
+                visibility: hidden; 
+                text-align: center;
+                padding: 0;
+                margin-left: 1rem;
+            }
+        /* --------------------------------------------------
+        ناحیه آیتم‌های اکشن (اکانت، سبد، CTA)
+        -------------------------------------------------- */
+        .action-buttons-container {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            background: transparent;
+            width: 100%; 
+        }
+
+        /* --------------------------------------------------
+        اورلی منو
+        -------------------------------------------------- */
+        .full-screen-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(52, 57, 57, 0.95);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #ffffff;
+        }
+        
+        /* --------------------------------------------------
+        ریسپانسیو (موبایل و تبلت)
+        -------------------------------------------------- */
+        @media (max-width: 1024px) {
+            .minimal-vertical-header {
+                right: 1rem; 
+                width: calc(100% - 2rem); 
+                height: 16vh; 
+                flex-direction: row !important;
+                justify-content: space-between;
+                align-items: center;
+
+                padding: 0 1.5rem !important; 
+                animation: none;
+                opacity: 1;
+                transform: none;
+                
+                /* در موبایل، حالت بلور و رنگ تیره باید ثابت بماند */
+                backdrop-filter: blur(4px) !important;
+                background-color: rgb(0 0 0 / 9%) !important; 
+            }
+            
+            /* در موبایل، کلاس is-expanded-menu هیچ تغییری در پس‌زمینه اعمال نمی‌کند (هدف: ثابت ماندن) */
+            .minimal-vertical-header.is-expanded-menu {
+                backdrop-filter: none !important; 
+                background-color: var(--wp--preset--color--surface) !important;
+                color: #1a1a1a;
+            }
+
+            /* حالت موبایل */
+            .minimal-vertical-header > .logo-container {
+                position: static !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+                width: auto !important;
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                height: auto !important;
+                min-height: auto !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+            }
+
+            /* ریست کامل برای لوگو */
+            .minimal-vertical-header > .logo-container .salnama-logo,
+            .minimal-vertical-header > .logo-container .wp-block-site-logo,
+            .minimal-vertical-header > .logo-container .custom-logo-link {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                position: static !important;
+                transform: none !important;
+                width: auto !important;
+                height: auto !important;
+            }
+
+            .minimal-vertical-header > .logo-container .custom-logo {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                max-height: 50px !important;
+                width: auto !important;
+                height: auto !important;
+                min-width: 80px !important;
+            }
+
+            /* عنوان سایت */
+            .minimal-vertical-header > .logo-container .wp-block-site-title {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                font-size: 14px !important;
+                margin-top: 5px !important;
+                text-align: center !important;
+                white-space: nowrap;
+            }
+
+              /* div سوم - دکمه‌ها در سمت چپ */
+            .minimal-vertical-header > .action-buttons-container {
+                margin-right: auto;
+                margin-top: 0 !important;
+                width: auto !important;
+                display: none;
+            }
+              /* استایل‌های اضافی برای نمایش صحیح */
+            .minimal-vertical-header .menu-toggle-area {
+                padding-right: 0 !important;
+            }
+
+            .minimal-vertical-header .action-icons {
+                flex-direction: row !important;
+                gap: 1rem;
+            }
+
+            .minimal-vertical-header .cta-button-wrapper {
+                padding: 0.5rem !important;
+            }
+
+            .minimal-vertical-header .salnama-logo img {
+                max-height: 40px;
+                width: auto;
+            }
+            .wp-block-site-title {
+                display: none;
+            }
+}
