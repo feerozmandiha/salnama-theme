@@ -7,19 +7,21 @@ namespace Salnama_Theme\Core;
  */
 class AssetsLoader {
 
-    /**
-     * ثبت هک‌ها و فیلترهای مربوط به بارگذاری منابع
-     */
     public function run() {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
         add_filter( 'script_loader_tag', [ $this, 'add_module_type_to_app_js' ], 10, 3 );
+        add_action('enqueue_block_editor_assets', [$this, 'enqueue_block_assets']);
+        add_action('init', [$this, 'register_assets']);
+        
+        error_log('✅ AssetsLoader initialized');
     }
 
     /**
      * بارگذاری فایل‌های استایل
      */
     public function enqueue_styles() {
+        // استایل اصلی تم
         wp_enqueue_style( 
             'salnama-theme-tailwind', 
             SALNAMA_ASSETS_URI . '/css/dist/tailwind.css', 
@@ -33,6 +35,23 @@ class AssetsLoader {
             ['salnama-theme-tailwind'], 
             SALNAMA_THEME_VERSION 
         );
+
+        // استایل‌های سیستم مودال
+        wp_enqueue_style(
+            'salnama-modal-system',
+            SALNAMA_ASSETS_URI . '/css/modals/modal-system.css',
+            [],
+            SALNAMA_THEME_VERSION
+        );
+
+        wp_enqueue_style(
+            'salnama-header-modal',
+            SALNAMA_ASSETS_URI . '/css/modals/header-cta-modal.css',
+            ['salnama-modal-system'],
+            SALNAMA_THEME_VERSION
+        );
+        
+        error_log('✅ Styles enqueued');
     }
 
     /**
@@ -65,6 +84,52 @@ class AssetsLoader {
             SALNAMA_THEME_VERSION, 
             true
         );
+
+        // اسکریپت سیستم مودال
+        wp_enqueue_script(
+            'salnama-modal-system',
+            SALNAMA_ASSETS_URI . '/js/modules/ModalSystem.js',
+            [],
+            SALNAMA_THEME_VERSION,
+            [
+                'strategy' => 'defer',
+                'in_footer' => true
+            ]
+        );
+        
+        error_log('✅ Scripts enqueued');
+    }
+
+    public function register_assets() {
+        // ثبت استایل‌ها و اسکریپت‌ها برای استفاده مجدد
+        wp_register_style(
+            'salnama-modern-modals',
+            SALNAMA_ASSETS_URI . '/css/modals/modal-system.css',
+            [],
+            SALNAMA_THEME_VERSION
+        );
+        
+        wp_register_script(
+            'salnama-modal-system',
+            SALNAMA_ASSETS_URI . '/js/modules/ModalSystem.js',
+            [],
+            SALNAMA_THEME_VERSION,
+            ['strategy' => 'defer', 'in_footer' => true]
+        );
+        
+        error_log('✅ Assets registered');
+    }
+
+    public function enqueue_block_assets() {
+        // استایل‌های ادیتور اختصاصی
+        wp_enqueue_style(
+            'salnama-editor-styles',
+            SALNAMA_ASSETS_URI . '/css/editor.css',
+            ['wp-edit-blocks'],
+            SALNAMA_THEME_VERSION
+        );
+        
+        error_log('✅ Block editor assets enqueued');
     }
 
     /**

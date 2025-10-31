@@ -1,0 +1,373 @@
+/**
+ * سیستم مدرن مودال‌های سالنامه
+ * طراحی شده برای وردپرس 6.8 + گوتنبرگ
+ */
+
+/* متغیرهای سیستمی */
+:root {
+  --modal-backdrop-blur: 12px;
+  --modal-border-radius: 20px;
+  --modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --modal-background: rgba(255, 255, 255, 0.95);
+  --modal-border: 1px solid rgba(255, 255, 255, 0.2);
+  --modal-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* رنگ‌های سیستمی */
+  --primary-gradient: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  
+  /* تایپوگرافی */
+  --font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* استایل‌های پایه مودال */
+.salnama-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: none;
+  animation: modalBackdropIn 0.3s ease;
+}
+
+.salnama-modal.active {
+  display: block;
+}
+
+.salnama-modal.hidden {
+  display: none;
+}
+
+/* انیمیشن‌های ورود و خروج */
+@keyframes modalBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalContentIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalContentOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+}
+
+/* Overlay شیشه‌ای */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(var(--modal-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--modal-backdrop-blur));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalBackdropIn 0.3s ease;
+}
+
+/* محتوای مودال */
+.modal-content {
+  background: var(--modal-background);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--modal-border-radius);
+  position: relative;
+  box-shadow: var(--modal-shadow);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: var(--modal-border);
+  animation: modalContentIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* سایزهای مختلف مودال */
+.modal-size-small {
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-size-medium {
+  width: 100%;
+  max-width: 500px;
+}
+
+.modal-size-large {
+  width: 100%;
+  max-width: 600px;
+}
+
+.modal-size-full {
+  width: 95vw;
+  height: 95vh;
+}
+
+/* دکمه بستن */
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: currentColor;
+  transition: var(--modal-transition);
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* استایل‌های عمومی برای تمام مودال‌ها */
+.modal-header {
+  padding: 30px 30px 0;
+}
+
+.modal-body {
+  padding: 0 30px 30px;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.modal-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* فرم‌های مودال */
+.modern-form {
+  margin-top: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: var(--modal-transition);
+  background: white;
+  font-family: var(--font-family);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* دکمه‌های اقدام */
+.primary-btn {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--modal-transition);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+/* وضعیت‌های مختلف دکمه */
+.primary-btn.loading {
+  pointer-events: none;
+}
+
+.primary-btn.success {
+  background: var(--success-color);
+}
+
+.primary-btn.error {
+  background: var(--error-color);
+}
+
+/* انیمیشن بارگذاری */
+.btn-loader {
+  display: flex;
+  align-items: center;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 10px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-header {
+    padding: 25px 20px 0;
+  }
+  
+  .modal-body {
+    padding: 0 20px 25px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header {
+    padding: 20px 15px 0;
+  }
+  
+  .modal-body {
+    padding: 0 15px 20px;
+  }
+  
+  .modal-close-btn {
+    top: 15px;
+    left: 15px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* پشتیبانی از حالت تاریک */
+@media (prefers-color-scheme: dark) {
+  .salnama-modal {
+    --modal-background: rgba(30, 30, 30, 0.95);
+    --modal-border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .modal-content {
+    color: #f3f4f6;
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f3f4f6;
+  }
+  
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: #3b82f6;
+  }
+  
+  .form-label {
+    color: #d1d5db;
+  }
+}

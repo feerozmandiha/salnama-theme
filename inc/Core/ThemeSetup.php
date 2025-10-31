@@ -8,53 +8,54 @@ namespace Salnama_Theme\Core;
 class ThemeSetup {
 
     public function run() {
-        add_action( 'after_setup_theme', [ $this, 'theme_support' ] );
+        add_action( 'after_setup_theme', [ $this, 'setup_theme' ] );
         add_action( 'init', [ $this, 'register_nav_menus' ] );
         add_filter( 'upload_mimes', [ $this, 'allow_svg_uploads' ] );
         add_action( 'admin_head', [ $this, 'fix_svg_display' ] );
 
-        // غیرفعال کردن Layout Styles داینامیک برای Group Block (جلوگیری از کلاس‌های .wp-container-...)
+        // غیرفعال کردن Layout Styles داینامیک برای Group Block
         add_filter( 'block_core_group_render_layout_support', '__return_false' );
     }
 
     /**
      * Adds support for various WordPress features and functionalities.
      */
-    public function theme_support() {
-        // فعال‌سازی عنوان داینامیک در تگ <title>
-        add_theme_support( 'title-tag' );
-        add_theme_support( 'editor-styles' );
-        add_theme_support( 'editor-font-sizes' );
+    public function setup_theme() {
+        // پشتیبانی از ویژگی‌های FSE
+        add_theme_support('wp-block-styles');
+        add_theme_support('editor-styles');
+        add_theme_support('appearance-tools');
+        add_theme_support('custom-spacing');
+        add_theme_support('custom-line-height');
+        
+        // پشتیبانی از محتوای تمام عرض
+        add_theme_support('align-wide');
+        add_theme_support('block-templates');
 
-        // فعال‌سازی پشتیبانی از پست‌تامبنیل
-        add_theme_support( 'post-thumbnails' );
+        // مدیریت عنوان داینامیک
+        add_theme_support('title-tag');
+        
+        // تصویر شاخص
+        add_theme_support('post-thumbnails');
+        add_theme_support('responsive-embeds');
 
-        // تعیین محتوای اصلی تمپلیت
-        add_theme_support( 'html5', [
+        // HTML5
+        add_theme_support('html5', [
             'search-form',
             'comment-form',
             'comment-list',
             'gallery',
             'caption',
-            'style',
             'script',
-        ] );
-
-        // پشتیبانی از بلوک‌های عریض و تمام عرض
-        add_theme_support( 'align-wide' );
-
-        // غیرفعال کردن استایل‌های پیش‌فرض بلوک‌ها (برای استفاده کامل از Tailwind)
-        // add_theme_support( 'wp-block-styles' );
-
-        // مدیریت ترجمه
-        load_theme_textdomain( 'salnama-theme', SALNAMA_THEME_PATH . '/languages' );
-
-        // تنظیمات theme.json
-        add_theme_support( 'custom-spacing' );
-        add_theme_support( 'custom-border' );
-        add_theme_support( 'custom-units', [ 'rem', 'em', 'px', '%', 'vh', 'vw' ] );
+            'style'
+        ]);
+        
+        // ترجمه
+        load_theme_textdomain('salnama-theme', get_template_directory() . '/languages');
+        
+        error_log('✅ Theme setup completed');
     }
-    
+
     /**
      * Registers navigation menus for the theme.
      */
@@ -64,6 +65,8 @@ class ThemeSetup {
             'footer-menu' => esc_html__( 'منوی فوتر (ناوبری)', 'salnama-theme' ),
             'mobile-menu' => esc_html__( 'منوی تمام صفحه (Off-Canvas)', 'salnama-theme' ),
         ] );
+        
+        error_log('✅ Navigation menus registered');
     }
 
     // اجازه بارگذاری فایل‌های SVG
@@ -81,6 +84,4 @@ class ThemeSetup {
             }
         </style>';
     }
-
-
 }

@@ -58,21 +58,21 @@
 					"slug": "transparent"
 				},
 				{
-					"slug": "modal-background",
-					"color": "#00000080",
-					"name": "Modal Background"
+					"slug": "modal-backdrop",
+					"color": "#rgba(0, 0, 0, 0.5)",
+					"name": "Modal Backdrop"
 				},
 				{
-					"slug": "modal-overlay",
-					"color": "rgba(0, 0, 0, 0.5)",
-					"name": "Modal Overlay"
+					"slug": "modal-glass",
+					"color": "rgba(255, 255, 255, 0.1)",
+					"name": "Modal Glass"
 				}
 			]
 		},
 		"custom": {
-			"transition": "0.3s ease-in-out",
-			"modal-animation-duration": "0.3s",
-      		"modal-backdrop-blur": "8px"
+			"modal-animation-duration": "0.4s",
+			"modal-backdrop-blur": "12px",
+			"modal-easing": "cubic-bezier(0.4, 0, 0.2, 1)"
 		},
 		"layout": {
 			"contentSize": "1200px",
@@ -202,6 +202,16 @@
 	"styles": {
 		"blocks": {
 			"core/button": {
+				"variations": {
+					"modal-trigger":{
+						
+					},
+					"modal-close":{
+						"border": {
+							"radius": "10px"
+						}
+					}
+				},
 				"spacing": {
 					"padding": {
 						"bottom": "var(--wp--preset--spacing--20)",
@@ -309,12 +319,6 @@
 			"label": "مودال‌های سالنامه"
 		}
 
-	],
-	"patterns": [
-		"modal-consultation",
-		"modal-special-order", 
-		"call-to-action-consultation",
-		"call-to-action-order"
 	],
 	"version": 3,
 	"$schema": "https://schemas.wp.org/trunk/theme.json"

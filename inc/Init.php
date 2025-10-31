@@ -4,8 +4,8 @@ namespace Salnama_Theme;
 use Salnama_Theme\Core\ThemeSetup;
 use Salnama_Theme\Core\AssetsLoader;
 use Salnama_Theme\Core\ThemeUpdater; // اضافه کردن کلاس آپدیت
-
 use Salnama_Theme\Core\BlockPattern;
+use Salnama_Theme\Modals\ModalManager;
 
 use Salnama_Theme\WooCommerce\WooCommerceSetup; // کلاس آینده
 
@@ -25,7 +25,8 @@ class Init {
             ThemeSetup::class,
             AssetsLoader::class,
             ThemeUpdater::class, // فعال کردن آپدیت خودکار
-
+            BlockPattern::class,
+            ModalManager::class,
             // WooCommerceSetup::class, // ثبت کلاس‌های WooCommerce برای مدیریت تنظیمات فروشگاه
         ];
     }
