@@ -1,27 +1,19 @@
 <?php
 namespace Salnama_Theme\Core;
 
-/**
- * مدیریت بارگذاری فایل‌های CSS و جاوااسکریپت
- * این کلاس تمام منابع استاتیک قالب را ثبت می‌کند.
- */
 class AssetsLoader {
 
     public function run() {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+        add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
         add_filter( 'script_loader_tag', [ $this, 'add_module_type_to_app_js' ], 10, 3 );
-        add_action('enqueue_block_editor_assets', [$this, 'enqueue_block_assets']);
-        add_action('init', [$this, 'register_assets']);
         
         error_log('✅ AssetsLoader initialized');
     }
 
-    /**
-     * بارگذاری فایل‌های استایل
-     */
     public function enqueue_styles() {
-        // استایل اصلی تم
+        // استایل‌های اصلی
         wp_enqueue_style( 
             'salnama-theme-tailwind', 
             SALNAMA_ASSETS_URI . '/css/dist/tailwind.css', 
@@ -36,22 +28,27 @@ class AssetsLoader {
             SALNAMA_THEME_VERSION 
         );
 
-        // استایل‌های سیستم مودال
+        // استایل‌های ضروری برای مودال‌ها
         wp_enqueue_style(
-            'salnama-modal-system',
-            SALNAMA_ASSETS_URI . '/css/modals/modal-system.css',
+            'salnama-modal-essential',
+            SALNAMA_ASSETS_URI . '/css/modals/modal-essential.css',
             [],
             SALNAMA_THEME_VERSION
         );
+        
+        error_log('✅ Frontend styles enqueued');
+    }
 
+    public function enqueue_editor_assets() {
+        // استایل‌های ویرایشگر
         wp_enqueue_style(
-            'salnama-header-modal',
-            SALNAMA_ASSETS_URI . '/css/modals/header-cta-modal.css',
-            ['salnama-modal-system'],
+            'salnama-editor-styles',
+            SALNAMA_ASSETS_URI . '/css/editor.css',
+            ['wp-edit-blocks'],
             SALNAMA_THEME_VERSION
         );
         
-        error_log('✅ Styles enqueued');
+        error_log('✅ Editor styles enqueued');
     }
 
     /**
@@ -76,7 +73,7 @@ class AssetsLoader {
             true
         );
 
-        // اسکریپت اصلی برنامه (به صورت ماژول)
+        // اسکریپت اصلی برنامه
         wp_enqueue_script(
             'salnama-theme-app-js',
             SALNAMA_ASSETS_URI . '/js/core/App.js', 
@@ -100,43 +97,16 @@ class AssetsLoader {
         error_log('✅ Scripts enqueued');
     }
 
-    public function register_assets() {
-        // ثبت استایل‌ها و اسکریپت‌ها برای استفاده مجدد
-        wp_register_style(
-            'salnama-modern-modals',
-            SALNAMA_ASSETS_URI . '/css/modals/modal-system.css',
-            [],
-            SALNAMA_THEME_VERSION
-        );
-        
-        wp_register_script(
-            'salnama-modal-system',
-            SALNAMA_ASSETS_URI . '/js/modules/ModalSystem.js',
-            [],
-            SALNAMA_THEME_VERSION,
-            ['strategy' => 'defer', 'in_footer' => true]
-        );
-        
-        error_log('✅ Assets registered');
-    }
-
-    public function enqueue_block_assets() {
-        // استایل‌های ادیتور اختصاصی
-        wp_enqueue_style(
-            'salnama-editor-styles',
-            SALNAMA_ASSETS_URI . '/css/editor.css',
-            ['wp-edit-blocks'],
-            SALNAMA_THEME_VERSION
-        );
-        
-        error_log('✅ Block editor assets enqueued');
-    }
-
     /**
-     * افزودن type="module" به اسکریپت اصلی
+     * افزودن type="module" به اسکریپت‌های ماژولار
      */
     public function add_module_type_to_app_js( $tag, $handle, $src ) {
-        if ( 'salnama-theme-app-js' === $handle ) {
+        $module_handles = [
+            'salnama-theme-app-js',
+            'salnama-modal-system'
+        ];
+        
+        if ( in_array( $handle, $module_handles ) ) {
             return '<script type="module" src="' . esc_url( $src ) . '"></script>';
         }
         return $tag;

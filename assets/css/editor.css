@@ -1,0 +1,30 @@
+/**
+ * استایل‌های ویرایشگر برای سالنامه
+ * فقط استایل‌های ضروری برای نمایش بهتر در ادیتور
+ */
+
+/* نمایش مودال‌ها در ویرایشگر */
+.salnama-modal:not(.hidden) {
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* استایل برای دکمه‌های مودال در ویرایشگر */
+[data-modal-trigger],
+[data-modal-close] {
+    cursor: pointer;
+}
+
+/* نمایش overlay در ویرایشگر */
+.wp-block-cover[style*="min-height:100vh"] {
+    min-height: 400px !important;
+    position: relative !important;
+}
+
+/* بهبود نمایش فرم‌ها در ویرایشگر */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    max-width: 100%;
+}
