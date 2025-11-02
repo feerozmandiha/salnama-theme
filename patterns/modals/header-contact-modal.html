@@ -1,5 +1,9 @@
-<!-- wp:html -->
-<div class="salnama-modal hidden" data-modal-type="header-contact">
+
+<!-- wp:group {"className":"salnama-modal hidden","layout":{"type":"default"}} -->
+<div class="wp-block-group salnama-modal hidden" data-modal-type="header-contact"><!-- wp:group {"className":"modal-overlay","layout":{"type":"default"}} -->
+<div class="wp-block-group modal-overlay" data-modal-close="true"></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --><div class="salnama-modal hidden" data-modal-type="header-contact">
     
     <!-- Overlay و محتوای مودال -->
     <div class="modal-overlay" data-modal-close="true">
@@ -10,70 +14,44 @@
                 <a class="modal-close-btn" href="#" data-modal-close="true">× بستن</a>
                 
                 <!-- هدر مودال -->
-                <div class="modal-header">
-                    <h3>دریافت مشاوره تخصصی</h3>
-                    <p>کارشناسان ما در کمتر از ۲ ساعت با شما تماس می‌گیرند</p>
-                </div>
-                
-                <!-- فرم تماس -->
-                <form class="contact-form">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="fullname">نام و نام خانوادگی *</label>
-                            <input type="text" id="fullname" name="fullname" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="company">نام شرکت (اختیاری)</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">شماره تماس *</label>
-                            <input type="tel" id="phone" name="phone" required dir="ltr">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">نوع خدمات مورد نیاز</label>
-                            <select id="service" name="service">
-                                <option value="">انتخاب کنید</option>
-                                <option value="consultation">مشاوره رایگان</option>
-                                <option value="web-design">طراحی وب‌سایت</option>
-                                <option value="seo">سئو و بهینه‌سازی</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group full-width">
-                            <label for="message">توضیحات پروژه (اختیاری)</label>
-                            <textarea id="message" name="message" rows="3" placeholder="در صورت نیاز، توضیحات بیشتری ارائه دهید..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">دریافت مشاوره رایگان</button>
-                </form>
-                
-                <!-- روش‌های ارتباطی جایگزین -->
-                <div class="contact-alternatives">
-                    <div class="divider">
-                        <span>یا از طریق</span>
-                    </div>
-                    
-                    <div class="alternative-methods">
-                        <a href="https://wa.me/989121234567" class="alt-method whatsapp" target="_blank" rel="noopener">
-                            <span class="method-icon">📱</span>
-                            <span class="method-text">واتساپ</span>
-                        </a>
-                        
-                        <a href="tel:+982188776655" class="alt-method phone">
-                            <span class="method-icon">📞</span>
-                            <span class="method-text">تماس تلفنی</span>
-                        </a>
-                    </div>
-                </div>
+             <!-- wp:group {"className":"modal-header","layout":{"type":"constrained"}} -->
+<div class="wp-block-group modal-header"><!-- wp:heading {"textAlign":"center"} -->
+<h2 class="wp-block-heading has-text-align-center">راه ارتباطی برای مشاوره</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">کارشناسان با تجربه ما آماده پاسخ گویی به سوالات شما هستند.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>تماس مستقیم با کارشناسان</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"textAlign":"center"} -->
+<h2 class="wp-block-heading has-text-align-center"><a href="tel:09124533878">09124533878</a></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ارتباط با شبکه های اجتماعی</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:social-links {"layout":{"type":"flex","justifyContent":"center"}} -->
+<ul class="wp-block-social-links"><!-- wp:social-link {"url":"feerozmandiha@gmail.com","service":"mail"} /-->
+
+<!-- wp:social-link {"url":"https://wa.me/+989124533878","service":"whatsapp"} /-->
+
+<!-- wp:social-link {"url":"https://t.me/salnama","service":"telegram"} /-->
+
+<!-- wp:social-link {"url":"https://instagram.com/salnamanoo","service":"instagram"} /--></ul>
+<!-- /wp:social-links -->
+
+<!-- wp:paragraph -->
+<p>جهت تماس کارشناسان ما لطفا فرم زیر را تکمیل کنید تا در سیریع ترین زمان با شما تماس بگیرند.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
                 
             </div>
         </div>
     </div>
     
 </div>
-<!-- /wp:html -->

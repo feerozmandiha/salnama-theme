@@ -147,7 +147,7 @@ initHoverEvents() {
                     }
 
                     gsap.to(this.header, {
-                        height: '20vh',
+                        height: '22vh',
                         duration: 0.6,
                         ease: 'expo.in'
                     });
@@ -227,7 +227,7 @@ initHoverEvents() {
         } else {
             if (isDesktop()) {
                 gsap.to(this.header, {
-                    height: '20vh',
+                    height: '22vh',
                     duration: 0.5,
                     ease: 'expo.in'
                 });
@@ -279,7 +279,7 @@ initHoverEvents() {
     handleResize() {
         if (isDesktop()) {
             if (!this.isMenuOpen) {
-                gsap.set(this.header, { height: '20vh', y: 0 });
+                gsap.set(this.header, { height: '22vh', y: 0 });
                 this.setArrowLoop('initial');
             }
         } else {

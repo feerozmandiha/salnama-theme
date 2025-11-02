@@ -58,14 +58,14 @@
 					"slug": "transparent"
 				},
 				{
-					"slug": "modal-backdrop",
 					"color": "#rgba(0, 0, 0, 0.5)",
-					"name": "Modal Backdrop"
+					"name": "Modal Backdrop",
+					"slug": "modal-backdrop"
 				},
 				{
-					"slug": "modal-glass",
 					"color": "rgba(255, 255, 255, 0.1)",
-					"name": "Modal Glass"
+					"name": "Modal Glass",
+					"slug": "modal-glass"
 				}
 			]
 		},
@@ -202,16 +202,6 @@
 	"styles": {
 		"blocks": {
 			"core/button": {
-				"variations": {
-					"modal-trigger":{
-						
-					},
-					"modal-close":{
-						"border": {
-							"radius": "10px"
-						}
-					}
-				},
 				"spacing": {
 					"padding": {
 						"bottom": "var(--wp--preset--spacing--20)",
@@ -219,6 +209,14 @@
 						"right": "var(--wp--preset--spacing--20)",
 						"top": "var(--wp--preset--spacing--20)"
 					}
+				},
+				"variations": {
+					"modal-close": {
+						"border": {
+							"radius": "10px"
+						}
+					},
+					"modal-trigger": []
 				}
 			},
 			"core/cover": {
@@ -312,13 +310,6 @@
 			"area": "cta-modal",
 			"name": "cta-modal"
 		}
-	],
-	"patternCategories": [
-		{
-			"name": "salmama-modals",
-			"label": "مودال‌های سالنامه"
-		}
-
 	],
 	"version": 3,
 	"$schema": "https://schemas.wp.org/trunk/theme.json"

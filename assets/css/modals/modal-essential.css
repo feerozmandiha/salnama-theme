@@ -1,4 +1,5 @@
 /* استایل‌های ضروری برای عملکرد مودال‌ها - HTML Block Version */
+/* استایل‌های اصلاح شده برای مودال */
 .salnama-modal {
     position: fixed;
     top: 0;
@@ -10,14 +11,16 @@
 }
 
 .salnama-modal.active {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .salnama-modal.hidden {
-    display: none;
+    display: none !important;
 }
 
-/* Overlay */
+/* Overlay - اصلاح شده */
 .modal-overlay {
     position: absolute;
     top: 0;
@@ -26,15 +29,16 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    cursor: pointer;
 }
 
+/* محتوای مودال - جلوگیری از انتشار کلیک */
 .modal-container {
+    position: relative;
     width: 100%;
     max-width: 500px;
+    max-height: 90vh;
+    cursor: default;
 }
 
 .modal-content {
@@ -43,11 +47,11 @@
     padding: 40px 30px 30px;
     position: relative;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    max-height: 90vh;
     overflow-y: auto;
+    cursor: default;
 }
 
-/* دکمه بستن */
+/* دکمه بستن - بهبود یافته */
 .modal-close-btn {
     cursor: pointer;
     position: absolute;
@@ -66,6 +70,7 @@
     font-size: 20px;
     font-weight: bold;
     transition: all 0.2s ease;
+    z-index: 10000;
 }
 
 .modal-close-btn:hover {

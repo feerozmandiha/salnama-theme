@@ -1,8 +1,6 @@
 /**
- * سیستم مدیریت مودال‌های سالنامه
- * رفع مشکل event propagation
+ * سیستم مدیریت مودال‌های سالنامه - نسخه اصلاح شده
  */
-
 class ModalSystem {
     constructor() {
         this.modals = new Map();
@@ -11,7 +9,7 @@ class ModalSystem {
     }
 
     init() {
-        console.log('🚀 ModalSystem initialized - Event Propagation Fixed');
+        console.log('🚀 ModalSystem initialized - Fixed Version');
         this.registerExistingModals();
         this.setupEventListeners();
         this.setupGlobalMethods();
@@ -29,8 +27,6 @@ class ModalSystem {
                 console.log(`✅ Modal registered: ${modalType}`);
             }
         });
-
-        console.log('📋 All registered modals:', Array.from(this.modals.keys()));
     }
 
     registerModal(modalId, modalElement) {
@@ -47,7 +43,12 @@ class ModalSystem {
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             this.activeModal = modalId;
-            console.log(`✅ Modal opened: ${modalId}`);
+            
+            // فوکوس روی اولین المان قابل فوکوس برای دسترسی‌پذیری
+            const focusableElement = modal.querySelector('input, button, select, textarea');
+            if (focusableElement) {
+                focusableElement.focus();
+            }
         } else {
             console.error(`❌ Modal not found: ${modalId}`);
         }
@@ -91,7 +92,7 @@ class ModalSystem {
             }
         });
 
-        // کلیک روی دکمه‌های بستن
+        // کلیک روی دکمه‌های بستن - اصلاح شده
         document.addEventListener('click', (e) => {
             const closeBtn = e.target.closest('[data-modal-close]');
             if (closeBtn) {
@@ -102,13 +103,11 @@ class ModalSystem {
             }
         });
 
-        // کلیک روی overlay - فقط اگر مستقیم روی overlay کلیک شده
+        // کلیک روی overlay - منطق اصلاح شده
         document.addEventListener('click', (e) => {
-            // فقط اگر روی خود overlay کلیک شده (نه روی فرزندانش)
-            if (e.target.classList.contains('modal-overlay') && 
-                !e.target.closest('.modal-container') &&
-                !e.target.closest('.modal-content')) {
-                console.log('🔴 Overlay clicked directly');
+            // اگر مودال فعالی وجود دارد و روی overlay کلیک شده
+            if (this.activeModal && e.target.classList.contains('modal-overlay')) {
+                console.log('🔴 Overlay clicked - closing modal');
                 this.closeAllModals();
             }
         });
@@ -116,17 +115,8 @@ class ModalSystem {
         // جلوگیری از بسته شدن وقتی روی محتوای مودال کلیک می‌شود
         document.addEventListener('click', (e) => {
             const modalContent = e.target.closest('.modal-content');
-            if (modalContent) {
+            if (modalContent && this.activeModal) {
                 console.log('📦 Modal content clicked - preventing close');
-                e.stopPropagation();
-            }
-        });
-
-        // کلیک روی container - جلوگیری از انتشار
-        document.addEventListener('click', (e) => {
-            const modalContainer = e.target.closest('.modal-container');
-            if (modalContainer) {
-                console.log('📦 Modal container clicked - preventing close');
                 e.stopPropagation();
             }
         });
@@ -183,7 +173,6 @@ class ModalSystem {
         window.closeModal = () => this.closeAllModals();
         
         console.log('✅ Global methods registered');
-        console.log('💡 Test: openModal("header-contact")');
     }
 }
 
@@ -191,5 +180,3 @@ class ModalSystem {
 document.addEventListener('DOMContentLoaded', () => {
     new ModalSystem();
 });
-
-console.log('📜 ModalSystem.js loaded - Event Propagation Fixed');
