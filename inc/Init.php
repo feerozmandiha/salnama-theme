@@ -1,6 +1,7 @@
 <?php
 namespace Salnama_Theme;
 
+use Salnama_Theme\Core\LoginLogo;
 use Salnama_Theme\Core\ThemeSetup;
 use Salnama_Theme\Core\AssetsLoader;
 use Salnama_Theme\Core\ThemeUpdater; // اضافه کردن کلاس آپدیت
@@ -22,6 +23,7 @@ class Init {
      */
     public static function get_services(): array {
         return [
+            LoginLogo::class,
             ThemeSetup::class,
             AssetsLoader::class,
             ThemeUpdater::class, // فعال کردن آپدیت خودکار
