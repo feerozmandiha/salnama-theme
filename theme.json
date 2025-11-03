@@ -311,6 +311,15 @@
 			"name": "cta-modal"
 		}
 	],
+	"customTemplates": [
+		{
+			"name": "front-page",
+			"title": "صفحه اصلی سفارشی",
+			"postTypes": [
+				"page"
+			]
+		}
+	],
 	"version": 3,
 	"$schema": "https://schemas.wp.org/trunk/theme.json"
 }
