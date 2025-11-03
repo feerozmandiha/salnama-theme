@@ -1,4 +1,13 @@
 {
+	"customTemplates": [
+		{
+			"name": "front-page",
+			"postTypes": [
+				"page"
+			],
+			"title": "صفحه اصلی سفارشی"
+		}
+	],
 	"settings": {
 		"appearanceTools": true,
 		"color": {
@@ -309,15 +318,6 @@
 		{
 			"area": "cta-modal",
 			"name": "cta-modal"
-		}
-	],
-	"customTemplates": [
-		{
-			"name": "front-page",
-			"title": "صفحه اصلی سفارشی",
-			"postTypes": [
-				"page"
-			]
 		}
 	],
 	"version": 3,
