@@ -12,6 +12,7 @@ class ThemeSetup {
         add_action( 'init', [ $this, 'register_nav_menus' ] );
         add_filter( 'upload_mimes', [ $this, 'allow_svg_uploads' ] );
         add_action( 'admin_head', [ $this, 'fix_svg_display' ] );
+        add_action('init', [ $this, 'salnama_register_animation_attributes' ] );
 
         // غیرفعال کردن Layout Styles داینامیک برای Group Block
         add_filter( 'block_core_group_render_layout_support', '__return_false' );
@@ -83,5 +84,52 @@ class ThemeSetup {
                 height: auto !important;
             }
         </style>';
+    }
+
+    /**
+     * ثبت اتریبیوت‌های انیمیشن برای تمام بلوک‌ها
+     */
+    public function salnama_register_animation_attributes() {
+        $block_types = [
+            'core/group',
+            'core/cover',
+            'core/columns', 
+            'core/column',
+            'core/image',
+            'core/media-text',
+            'core/button',
+            'core/gallery'
+        ];
+        
+        foreach ($block_types as $block_type) {
+            register_block_type($block_type, [
+                'attributes' => [
+                    'animationEntrance' => [
+                        'type' => 'string',
+                        'default' => 'none'
+                    ],
+                    'animationHover' => [
+                        'type' => 'string',
+                        'default' => 'none'
+                    ],
+                    'animationScroll' => [
+                        'type' => 'string', 
+                        'default' => 'none'
+                    ],
+                    'animationDelay' => [
+                        'type' => 'number',
+                        'default' => 0
+                    ],
+                    'animationDuration' => [
+                        'type' => 'string',
+                        'default' => 'normal'
+                    ],
+                    'animationStagger' => [
+                        'type' => 'boolean',
+                        'default' => false
+                    ]
+                ]
+            ]);
+        }
     }
 }

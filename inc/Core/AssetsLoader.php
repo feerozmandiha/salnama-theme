@@ -8,6 +8,7 @@ class AssetsLoader {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
         add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_assets' ] );
         add_filter( 'script_loader_tag', [ $this, 'add_module_type_to_app_js' ], 10, 3 );
+        add_filter( 'script_loader_tag', [ $this, 'add_module_type' ], 10, 3 );
         
         error_log('✅ AssetsLoader initialized');
     }
@@ -47,7 +48,29 @@ class AssetsLoader {
             ['wp-edit-blocks'],
             SALNAMA_THEME_VERSION
         );
-        
+
+        // اسکریپت کنترل‌های انیمیشن - به عنوان ماژول
+        wp_enqueue_script(
+            'salnama-animation-controls',
+            SALNAMA_ASSETS_URI . '/js/editor/animation-controls.js',
+            [
+                'wp-blocks',
+                'wp-element',
+                'wp-editor', 
+                'wp-components',
+                'wp-i18n',
+                'wp-block-editor',
+                'wp-hooks',
+                'react',
+                'react-dom'
+            ],
+            SALNAMA_THEME_VERSION,
+            true
+        );
+
+        // لوکالایزیشن برای جاوااسکریپت
+        wp_set_script_translations('salnama-animation-controls', 'salnama');
+            
         error_log('✅ Editor styles enqueued');
     }
 
@@ -109,6 +132,24 @@ class AssetsLoader {
         if ( in_array( $handle, $module_handles ) ) {
             return '<script type="module" src="' . esc_url( $src ) . '"></script>';
         }
+        return $tag;
+    }
+
+        /**
+     * افزودن type="module" به اسکریپت‌های ماژولار
+     */
+    public function add_module_type( $tag, $handle, $src ) {
+        $module_handles = [
+            'salnama-animation-controls'
+        ];
+        
+        if ( in_array( $handle, $module_handles ) ) {
+            // حذف attributeهای قدیمی و اضافه کردن type="module"
+            $tag = preg_replace('/type=[\'"].*?[\'"]/', '', $tag);
+            $tag = str_replace('<script ', '<script type="module" ', $tag);
+            return $tag;
+        }
+        
         return $tag;
     }
 }

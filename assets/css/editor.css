@@ -1,30 +1,30 @@
-/**
- * استایل‌های ویرایشگر برای سالنامه
- * فقط استایل‌های ضروری برای نمایش بهتر در ادیتور
- */
-
-/* نمایش مودال‌ها در ویرایشگر */
-.salnama-modal:not(.hidden) {
-    display: block !important;
-    position: relative !important;
-    z-index: 1 !important;
+/* استایل‌های پیش‌نمایش انیمیشن در ادیتور */
+.sal-fade-up {
+    opacity: 0.8;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
 }
 
-/* استایل برای دکمه‌های مودال در ویرایشگر */
-[data-modal-trigger],
-[data-modal-close] {
-    cursor: pointer;
+.sal-fade-left {
+    opacity: 0.8;
+    transform: translateX(-10px);
 }
 
-/* نمایش overlay در ویرایشگر */
-.wp-block-cover[style*="min-height:100vh"] {
-    min-height: 400px !important;
-    position: relative !important;
+.sal-scale-in {
+    opacity: 0.8;
+    transform: scale(0.95);
 }
 
-/* بهبود نمایش فرم‌ها در ویرایشگر */
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-    max-width: 100%;
+.sal-hover-lift:hover {
+    transform: translateY(-2px);
+}
+
+.sal-hover-glow:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* هایلایت بلوک‌های دارای انیمیشن در ادیتور */
+.block-editor-block-list__block[class*="sal-"] {
+    border-left: 3px solid #3b82f6;
+    padding-left: 8px;
 }
