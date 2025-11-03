@@ -35,7 +35,7 @@ class AssetsLoader {
             [],
             SALNAMA_THEME_VERSION
         );
-        
+
         error_log('✅ Frontend styles enqueued');
     }
 
