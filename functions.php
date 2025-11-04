@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 1. تعریف ثابت‌های اصلی قالب برای استفاده در کلاس‌های OOP
  */
 if ( ! defined( 'SALNAMA_THEME_VERSION' ) ) {
-    define( 'SALNAMA_THEME_VERSION', '1.0.4' );
+    define( 'SALNAMA_THEME_VERSION', '1.0.5' );
 }
 if ( ! defined( 'SALNAMA_THEME_PATH' ) ) {
     define( 'SALNAMA_THEME_PATH', get_template_directory() );
