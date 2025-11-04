@@ -1,7 +1,7 @@
 import { isDesktop } from '../core/utils.js';
 
 /**
- * کلاس مدیریت هدر عمودی — با انیمیشن‌های ملایم و طبیعی (سبک bras.fr)
+ *  کلاس مدیریت هدر عمودی — با انیمیشن‌های ملایم و طبیعی (سبک bras.fr)
  */
 export class Header {
     constructor() {

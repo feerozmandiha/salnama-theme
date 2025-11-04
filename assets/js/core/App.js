@@ -15,5 +15,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // مقداردهی اولیه ماژول هدر
     new Header();
     
-    // ... سایر ماژول‌ها (مانند ScrollAnimations و ContactButton) در اینجا اضافه می‌شوند
+    //  ... سایر ماژول‌ها (مانند ScrollAnimations و ContactButton) در اینجا اضافه می‌شوند
 });

@@ -32,7 +32,7 @@ class LoginLogo {
                 esc_url($logo_url)
             )
         );
-    }
+    } 
 
     /**
      * Returns the site logo URL from custom_logo setting.

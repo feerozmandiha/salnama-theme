@@ -18,7 +18,7 @@ use Salnama_Theme\WooCommerce\WooCommerceSetup; // کلاس آینده
 class Init {
 
     /**
-     * Retrieves a list of services (classes) that need to be instantiated and run.
+     *  Retrieves a list of services (classes) that need to be instantiated and run.
      * @return array Array of class names (fully qualified).
      */
     public static function get_services(): array {

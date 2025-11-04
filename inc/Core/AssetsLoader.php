@@ -49,7 +49,7 @@ class AssetsLoader {
             SALNAMA_THEME_VERSION
         );
 
-        // اسکریپت کنترل‌های انیمیشن - به عنوان ماژول
+        //  اسکریپت کنترل‌های انیمیشن - به عنوان ماژول
         wp_enqueue_script(
             'salnama-animation-controls',
             SALNAMA_ASSETS_URI . '/js/editor/animation-controls.js',

@@ -1,4 +1,4 @@
-/* استایل‌های CTA هدر */
+/*  استایل‌های CTA هدر */
 .header-cta-wrapper {
     display: flex;
     align-items: center;
@@ -8,7 +8,7 @@
     position: relative;
 }
 
-.header-cta-trigger {
+.header-cta-trigger { 
     display: flex;
     align-items: center;
     gap: 8px;

@@ -210,7 +210,7 @@
         withAnimationControls
     );
 
-    // اضافه کردن کلاس‌ها در ادیتور برای پیش‌نمایش
+    //   اضافه کردن کلاس‌ها در ادیتور برای پیش‌نمایش
     addFilter(
         'blocks.getSaveContent.extraProps',
         'salnama/addAnimationClasses',

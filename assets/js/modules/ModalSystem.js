@@ -179,4 +179,4 @@ class ModalSystem {
 // راه‌اندازی سیستم
 document.addEventListener('DOMContentLoaded', () => {
     new ModalSystem();
-});
+}); 
