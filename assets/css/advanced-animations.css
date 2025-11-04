@@ -1,0 +1,40 @@
+/* رفع تداخل با layout های اصلی */
+.wp-block-group .wp-block-group,
+.wp-block-columns .wp-block-column,
+.wp-block-column .wp-block-group {
+    /* غیرفعال کردن انیمیشن برای بلوک‌های تودرتو */
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* حفظ ساختار layout */
+.wp-block-columns,
+.wp-block-group[class*="sal-"] {
+    contain: layout style;
+}
+
+/* جلوگیری از تأثیر روی flex و grid */
+.wp-block-columns[class*="sal-"],
+.wp-block-group[class*="sal-"] {
+    transform-style: preserve-3d;
+}
+
+/* رفع مشکل با positioning */
+.wp-block-cover[class*="sal-"] {
+    position: relative !important;
+}
+
+/* بهبود performance */
+@media (prefers-reduced-motion: no-preference) {
+    .sal-fade-up,
+    .sal-fade-left,
+    .sal-fade-right {
+        will-change: transform, opacity;
+    }
+    
+    .sal-hover-lift,
+    .sal-hover-glow {
+        will-change: transform, box-shadow;
+    }
+}

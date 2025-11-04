@@ -210,6 +210,54 @@
         withAnimationControls
     );
 
+    // اضافه کردن شرط برای جلوگیری از انیمیشن روی بلوک‌های ساختاری
+    const shouldAnimateBlock = function(blockElement) {
+        const problematicClasses = [
+            'is-layout-',
+            'wp-container-',
+            'is-position-',
+            'has-background'
+        ];
+        
+        const problematicParents = [
+            '.wp-block-columns',
+            '.wp-block-group .wp-block-group',
+            '.wp-block-query',
+            '.wp-block-post-template'
+        ];
+        
+        // بررسی کلاس‌های مشکل‌زا
+        for (let cls of problematicClasses) {
+            if (blockElement.className.includes(cls)) {
+                return false;
+            }
+        }
+        
+        // بررسی والدین مشکل‌زا
+        for (let parent of problematicParents) {
+            if (blockElement.closest(parent)) {
+                return false;
+            }
+        }
+        
+        return true;
+    };
+
+    // در فیلتر getSaveContent
+    addFilter(
+        'blocks.getSaveContent.extraProps',
+        'salnama/addAnimationClasses',
+        function(props, block, attributes) {
+            // فقط اگر بلوک قابل انیمیشن باشد
+            if (!shouldAnimateBlock(props)) {
+                return props;
+            }
+            
+            var animationClasses = [];
+            // ... بقیه کد
+        }
+    );
+
     //   اضافه کردن کلاس‌ها در ادیتور برای پیش‌نمایش
     addFilter(
         'blocks.getSaveContent.extraProps',
